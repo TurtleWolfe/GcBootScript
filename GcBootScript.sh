@@ -1,32 +1,3 @@
-# # set TimeZone
-# timedatectl set-timezone America/New_York
-
-# # customize TTY prompt
-# sed -i 's/#force_color_prompt=yes/ force_color_prompt=yes/' /etc/skel/.bashrc
-
-# sed -i 's/\\\[\\033\[01;32m\\\]\\u@\\h\\\[\\033\[00m\\\]:\\\[\\033\[01;34m\\\]\\w\\\[\\033\[00m\\\]\\\$ /\\n\\@ \\\[\\e\[32;40m\\\]\\u\\\[\\e\[m\\\] \\\[\\e\[32;40m\\\]@\\\[\\e\[m\\\]\\n \\\[\\e\[32;40m\\\]\\H\\\[\\e\[m\\\] \\\[\\e\[36;40m\\\]\\w\\\[\\e\[m\\\] \\\[\\e\[33m\\\]\\\\\$\\\[\\e\[m\\\] /' /etc/skel/.bashrc
-
-# # customize TTY prompt
-# sed -i 's/#force_color_prompt=yes/ force_color_prompt=yes/' /home/dev_turtlewolfe/.bashrc
-
-# sed -i 's/\\\[\\033\[01;32m\\\]\\u@\\h\\\[\\033\[00m\\\]:\\\[\\033\[01;34m\\\]\\w\\\[\\033\[00m\\\]\\\$ /\\n\\@ \\\[\\e\[32;40m\\\]\\u\\\[\\e\[m\\\] \\\[\\e\[32;40m\\\]@\\\[\\e\[m\\\]\\n \\\[\\e\[32;40m\\\]\\H\\\[\\e\[m\\\] \\\[\\e\[36;40m\\\]\\w\\\[\\e\[m\\\] \\\[\\e\[33m\\\]\\\\\$\\\[\\e\[m\\\] /' /home/dev_turtlewolfe/.bashrc
-
-# apt update
-# # Chapter 15, Fail2Ban
-# apt-get -y install fail2ban
-# cp /etc/fail2ban/jail.conf /etc/fail2ban/jail.local
-
-# userdel -r ubuntu
-
-# # apt-get install -y git
-
-# # apt-get install  -y nano
-
-# # sudo apt install -y nginx
-
-
-
-
 #!/bin/bash
 
 # End the script immediately if any command or pipe exits with a non-zero status.
@@ -39,9 +10,11 @@ set -euo pipefail
 ########################
 
 # Name of the user to create and grant sudo privileges
+# USERNAME=janeDOE
 USERNAME=janeDOE
 
 # IP Address for accessing SSH
+# IP_ADDRESS=0.0.000.000
 IP_ADDRESS=0.0.000.000
 
 # cidr block for accessing SSH via Virtual Private Cloud
@@ -49,6 +22,7 @@ IP_ADDRESS=0.0.000.000
 aws_VPC=10.0.0.0/24
 
 # Port for accessing SSH
+# SSH_PORT=22
 SSH_PORT=22
 
 # Port for DEVelopment; ReAct :3000
@@ -67,12 +41,12 @@ SECRET=secret
 timedatectl set-timezone America/New_York
 
 # Whether to copy root user's `authorized_keys` file to the new sudo user.
-COPY_AUTHORIZED_KEYS_FROM_ROOT=true
+# COPY_AUTHORIZED_KEYS_FROM_ROOT=true
 
 # Additional public keys to add to the new sudo user
-OTHER_PUBLIC_KEYS_TO_ADD=(
-"ssh-rsa AAAAB..."
-)
+# OTHER_PUBLIC_KEYS_TO_ADD=(
+# "ssh-rsa AAAAB..."
+# )
 
 ####################
 ### SCRIPT LOGIC ###
@@ -197,117 +171,3 @@ sed -i 's/maxretry = 5/maxretry = 3/' /etc/fail2ban/jail.local
 sed -i "s/logpath = %(sshd_log)s/logpath = %(sshd_log)s\nenabled = true/" /etc/fail2ban/jail.local
 # sed -i "s/#ignoreip = 127.0.0.1\/8 ::1/ignoreip = 127.0.0.1\/8 ::1 ${aws_VPC} ${IP_ADDRESS}/" /etc/fail2ban/jail.local
 
-# apt install python3-pip -y
-# pip install docker
-# pip install docker-compose
-
-# Apache
-# sudo apt-get install apache2 -y
-################################################################################
-# apt-get install lamp-server^
-# mysql_secure_installation <<EOF
-# y
-# $SECRET
-# $SECRET
-# y
-# y
-# y
-# y
-# EOF
-################################################################################
-#     1  sudo apt update
-#     2  sudo apt upgrade
-#     3  sudo apt dist-upgrade
-#     4  clear
-#     5  wget http://nginx.org/keys/nginx_signing.key
-#     6  apt-key add nginx_signing.key
-#     7  sudo apt-key add nginx_signing.key
-#     8  nano /etc/apt/sources.list.d/nginx.list
-#     9  sudo nano /etc/apt/sources.list.d/nginx.list
-#    10  apt-get update
-#    11  sudo apt-get update
-#    12  apt-get install nginx
-#    13  sudo apt-get install nginx
-#    14  /usr/sbin/nginx -t
-#    15  sudo /usr/sbin/nginx -t
-#    16  history
-#    /usr/share/nginx/html 
-# apt upgrade -y
-
-# apt autoremove -y
-# apt autoclean -y
-# reboot
-
-# Install Docker on Ubuntu 18.04
-# Install Docker on Ubuntu 20.04
-# update apt-get libraries
-# apt update
-
-# sudo apt upgrade -y
-apt upgrade -y
-
-# install required packages
-# sudo apt install apt-transport-https ca-certificates curl software-properties-common
-# apt install apt-transport-https ca-certificates curl software-properties-common
-# apt install \
-#    apt-transport-https \
-#    ca-certificates \
-#    curl \
-#    software-properties-common
-
-
-# get the GPG key for docker
-# curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | \ && sudo apt-key add -
-
-# validating the docker GPG key is installed
-# sudo apt-key fingerprint 0EBFCD88
-apt-key fingerprint 0EBFCD88
-
-# adding the docker repository
-# sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-# add-apt-repository \
-#    "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
-#    $(lsb_release -cs) \
-#    stable"
-
-
-# update apt-get libraries again
-# sudo apt update
-apt update
-
-# sudo apt-cache policy docker-ce
-# apt-cache policy docker-ce
-
-# install docker
-# sudo apt install docker-ce
-apt install docker-ce
-# 406 MB
-
-# validate install with version command
-# docker --version
-
-# validating functionality by running a container
-# docker run hello-world
-
-# apt-key fingerprint 0EBFCD88
-
-# add the current user to the docker group
-# sudo usermod -aG docker "${USERNAME}"
-usermod -aG docker "${USERNAME}"
-#    17  exit
-#    16  id -nG
-
-# validate that sudo is no longer needed
-# docker run hello-world
-
-# install docker-compose
-sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-# curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-# curl -L https://github.com/docker/compose/releases/download/1.21.2/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose
-chmod +x /usr/local/bin/docker-compose
-#    21  sudo chmod +x /usr/local/bin/docker-compose
-#    22  docker-compose --version
-
-# reboot
